@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const authController = require('./controllers/auth.controller')
+const roomController = require('./controllers/room.controller')
 const dotenv = require('dotenv').config()
 
 const app = express()
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URL, () => console.log('DB is succesfully con
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use('/auth', authController)
+app.use('/room', roomController)
 
 
 
