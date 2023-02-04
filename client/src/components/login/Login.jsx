@@ -29,8 +29,9 @@ const Login = () => {
     } catch (error) {
       setError(true)
       setTimeout(() => {
-        setError(true)
-      }, 2500);
+        setError(false)
+      }, 2500)
+      console.error(error);
     }
   }
 
@@ -38,7 +39,7 @@ const Login = () => {
     <div className={classes.loginContainer}>
       <div className={classes.loginWrapper}>
         <div className={classes.loginLeftSide}>
-          <img src={img} className={classes.leftImg} />
+          <img src={img} className={classes.leftImg} alt='login' />
         </div>
         <div className={classes.loginRightSide}>
           <h2 className={classes.title}>Login</h2>
