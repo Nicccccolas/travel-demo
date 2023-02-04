@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const authController = require('./controllers/auth.controller')
 const roomController = require('./controllers/room.controller')
 const dotenv = require('dotenv').config()
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGO_URL, () => console.log('DB is succesfully con
 
 //? Middlewares
 //THOSE TWO ARE A MUST IF YOU USE REQ.BODY
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use('/auth', authController)

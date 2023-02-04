@@ -3,7 +3,7 @@ import classes from './suggestedPlaces.module.css'
 
 const SuggestedPlaces = () => {
   return (
-    <div>SuggestedPlaces</div>
+    <div style={{height: '200vh'}}>SuggestedPlaces</div>
   )
 }
 

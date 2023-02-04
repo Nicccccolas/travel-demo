@@ -9,6 +9,13 @@
   transition: 150ms all;
 }
 
+.scrolled{
+  background-color: #fff;
+  box-shadow: -5px 5px 19px -5px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: -5px 5px 19px -5px rgba(0, 0, 0, 0.08);
+  -moz-boz-shadow: -5px 5px 19px -5px rgba(0, 0, 0, 0.08);
+}
+
 .wrapper {
   padding-left: 1rem;
   padding-right: 1rem;
