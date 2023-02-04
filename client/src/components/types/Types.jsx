@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import classes from './types.module.css'
 import { Link } from 'react-router-dom'
 import img1 from '../../assets/img7.jpg'
+import { useSelector } from 'react-redux'
 
 const Types = () => {
   const [types, setTypes] = useState([])
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGM3MTdkMTM0Zjk5YTZhYjZhYTBhZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTM5MTc0N30.s24Sk-sgIGrWCnPxjM33aY7ACMdHmAVSzPPtKQAbiWQ'
-
+  const { token } = useSelector((state) => state.auth)
 
   useEffect(() => {
     const fetchTypes = async () => {
@@ -26,7 +25,6 @@ const Types = () => {
     fetchTypes()
   }, [])
 
-  console.log(Object.entries(types))
 
   return (
     <section id='services' className={classes.container}>

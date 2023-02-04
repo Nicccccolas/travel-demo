@@ -10,10 +10,12 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {  //State is the form in which we enter the initial state, and action is data (that we have provided in Login) 
+      localStorage.clear()
       state.user = action.payload.others
       state.token = action.payload.token
     },
     register(state, action) {  //State is the form in which we enter the initial state, and action is data (that we have provided in Login) 
+      localStorage.clear()
       state.user = action.payload.others
       state.token = action.payload.token
     }, 

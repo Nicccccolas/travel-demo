@@ -32,7 +32,7 @@ authController.post('/register', async(request, response) => {
 //login
 authController.post('/login', async(request, response) => {
   try {
-    const user = await User.findOne({email: request.body.email})
+    const user = await User.findOne({ email })
     if(!user) {
       return response.status(404).json({message: 'Invalid credentials'})
     }

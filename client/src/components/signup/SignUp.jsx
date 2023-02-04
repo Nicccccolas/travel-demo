@@ -18,13 +18,16 @@ const SignUp = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch('http://localhost:500/auth/register', {
+      const response = await fetch(`http://localhost:5000/auth/register`, {
         headers: {
-          'Content-Type': 'applications/json'
+          'Content-Type': 'application/json'
         },
         method: 'POST',
         body: JSON.stringify({username, email, password})
       })
+      if(response.status !== 201){
+        throw new Error('Register failed')
+      }
       const data = await response.json()
       dispatch(register(data))
       navigate('/')

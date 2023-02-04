@@ -119,4 +119,7 @@
   position: absolute;
   top: 5rem;
   right: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
