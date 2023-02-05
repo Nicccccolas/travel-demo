@@ -1,7 +1,9 @@
-import React from 'react'
-import navigate from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import classes from './create.module.css'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
+
 
 const Create = () => {
   const [title, setTitle] = useState('')
@@ -11,11 +13,71 @@ const Create = () => {
   const [type, setType] = useState('')
   const [price, setPrice] = useState(null)
   const [review, setReview] = useState(null)
-  const [error, setError] = useState(false)
+  const [typeError, setTypeError] = useState(false)
   const navigate = useNavigate()
+  const { token } = useSelector((state) => state.auth)
+
+  const changeImg = (e) => {
+    setImg(e.target.files[0])
+  }
+
+  const handleCloseImg = () => {
+    setImg(null)
+  }
 
   const handleCreateRoom = async (e) => {
+    e.preventDefault()
+    const acceptableTypes = ['apartment', 'villa', 'penthouse', 'bungalow']
+    if (!acceptableTypes.includes(type)) {
+      setTypeError(true)
+      setTimeout(() => {
+        setTypeError(false)
+      }, 10 * 1000)
+      return
+    }
 
+    try {
+      //? The instance formData is created
+      const formData = new formData()
+      let filename = null
+      if (img) {
+
+        //?Check if there is an img present. If so, it creates a file name using the current date and image name.
+        filename = Date.now() + img.name
+        //? Creates a file name using the current date (Date.now) and the image name (img.name). It then adds the file name and the image to the formData. (formData.append)
+        formData.append('filename', filename)
+        formData.append('image', img)
+
+        //? A POST request is made to the specified url, this sends the image to the server for storage. 
+        await fetch('http://localhost:5000/upload/image', {
+          method: 'POST',
+          body: formData
+        })
+      }
+      const response = await fetch('http://localhost:5000/room', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }, 
+        method: 'POST', 
+        body: JSON.stringify({
+          title,
+          description,
+          country, 
+          type,
+          photo: filename,
+          price, 
+          review
+        })
+      })
+
+      const newRoom = await response.json()
+      navigate(`/typeDetail/${newRoom._id}`)
+
+
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
