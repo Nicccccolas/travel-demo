@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import classes from './navbar.module.css'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const { user } = useSelector((state) => state.auth)
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true)
@@ -14,25 +16,37 @@ const Navbar = () => {
 
   return (
     <div className={`${classes.container} ${isScrolled && classes.scrolled}`}>
-        <div className={classes.wrapper}>
-          <div className={classes.left}>
-            <Link to='/'>
-              <h2 className={classes.title}>NicccccoDev</h2>
-            </Link>
-          </div>
-          <div className={classes.center}>
-            <ul className={classes.list}>
-              <li className={classes.listItem}><a href="#">Home</a></li>
-              <li className={classes.listItem}><a href="#about">About</a></li>
-              <li className={classes.listItem}><a href="#services">Services</a></li>
-              <li className={classes.listItem}><a href="#suggested">Suggested</a></li>
-            </ul>
-          </div>
-          <div className={classes.right}>
-            <Link className={classes.login} to='/login'>Login</Link>
-            <Link className={classes.signup} to='/signup'>Sign up</Link>
-          </div>
+      <div className={classes.wrapper}>
+        <div className={classes.left}>
+          <Link to='/'>
+            <h2 className={classes.title}>NicccccoDev</h2>
+          </Link>
         </div>
+        <div className={classes.center}>
+          <ul className={classes.list}>
+            <li className={classes.listItem}><a href="#">Home</a></li>
+            <li className={classes.listItem}><a href="#about">About</a></li>
+            <li className={classes.listItem}><a href="#services">Services</a></li>
+            <li className={classes.listItem}><a href="#suggested">Suggested</a></li>
+          </ul>
+        </div>
+        <div className={classes.right}>
+
+          {user ? (
+            <>
+              <Link to='/create'>Create</Link>
+              <p className={classes.username}>{user.username}</p>
+              <span className={classes.logout} onClick={handleLogout}>Logout</span>  
+            </>
+          ) : (
+            <>
+              <Link className={classes.login} to='/login'>Login</Link>
+              <Link className={classes.signup} to='/signup'>Sign up</Link>
+            </>
+          )}
+
+        </div>
+      </div>
     </div>
   )
 }
