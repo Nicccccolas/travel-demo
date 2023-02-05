@@ -58,15 +58,15 @@ const Create = () => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-        }, 
-        method: 'POST', 
+        },
+        method: 'POST',
         body: JSON.stringify({
           title,
           description,
-          country, 
+          country,
           type,
           photo: filename,
-          price, 
+          price,
           review
         })
       })
@@ -82,23 +82,23 @@ const Create = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.wrapped}>
+      <div className={classes.wrapper}>
         <h2 className={classes.title}>Create Room</h2>
         <form onSubmit={handleCreateRoom} encType='multipart/form-data' action="">
           <div className={classes.inputWrapper}>
-            <label>Title</label>
+            <label>Title: </label>
             <input type="text" onChange={() => { }} className={classes.input} placeholder='Title...' />
           </div>
           <div className={classes.inputWrapper}>
-            <label>Description</label>
+            <label>Description: </label>
             <input type="text" onChange={() => { }} className={classes.input} placeholder='Description...' />
           </div>
           <div className={classes.inputWrapper}>
-            <label>Country</label>
+            <label>Country: </label>
             <input type="text" onChange={() => { }} className={classes.input} placeholder='Country...' />
           </div>
           <div className={classes.inputWrapper}>
-            <label>Type</label>
+            <label>Type: </label>
             <input type="text" onChange={() => { }} className={classes.input} placeholder='Type...' />
           </div>
           <div className={classes.inputWrapperImg}>
