@@ -15,7 +15,7 @@ roomController.get('/', verifyToken, async (request, response) => {
     }
     return response.status(200).json(rooms)
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message, {message: 'invalid'})
   }
 })
 
@@ -48,18 +48,10 @@ roomController.get('/find/:id', verifyToken, async(request, response) => {
 roomController.post('/', verifyTokenAdmin, async(request, response) => {
   try {
     const createdRoom = await Room.create(request.body)
-    
     return response.status(201).json(createdRoom)
+
   } catch (error) {
-    console.log({error: error.message, fields: {
-      title: 'STRING', 
-      description: 'STRING', 
-      price: 'NUMBER', 
-      country: 'STRING', 
-      photo: 'STRING', 
-      type: 'STRING', 
-      review: 'NUMBER'
-    }})
+    console.error(error.message)
   }
 })
 

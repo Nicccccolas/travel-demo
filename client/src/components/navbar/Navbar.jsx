@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './navbar.module.css'
-import logout from '../../redux/authSlice'
+import { logout } from '../../redux/authSlice'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -39,19 +39,18 @@ const Navbar = () => {
           </ul>
         </div>
         <div className={classes.right}>
-
-          {user ? (
-            <>
-              <Link to='/create'>Create</Link>
-              <p className={classes.username}>{user.username}</p>
-              <span className={classes.logout} onClick={handleLogout}>Logout</span>
-            </>
-          ) : (
+          {!user ?
             <>
               <Link className={classes.login} to='/login'>Login</Link>
               <Link className={classes.signup} to='/signup'>Sign up</Link>
             </>
-          )}
+            :
+            <>
+            <Link to='/create'>Create</Link>
+            <p className={classes.username}>{user.username}</p>
+            <span onClick={handleLogout} className={classes.logout}>Logout</span>
+            </>
+          }
 
         </div>
       </div>

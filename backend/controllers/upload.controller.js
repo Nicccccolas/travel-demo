@@ -22,7 +22,7 @@ uploadController.post('/image', verifyToken, upload.single('image'), async(reque
   try {
     return response.status(200).json({message: 'File uploaded succesfully'})
   } catch (error) {
-    console.error(error)
+    console.error(error.message)
   }
 })
 
